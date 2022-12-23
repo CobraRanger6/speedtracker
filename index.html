@@ -1,0 +1,51 @@
+<!-- HTML for the user interface -->
+<div id="speed-display">
+    Current speed: <span id="current-speed">0</span> km/hr
+  </div>
+  <button id="silence-button" disabled>Silence Ringtone</button>
+  
+  <!-- CSS for styling the user interface -->
+  <style>
+    #speed-display {
+      font-size: 18px;
+    }
+    #silence-button {
+      font-size: 18px;
+      padding: 10px 20px;
+    }
+    #silence-button[disabled] {
+      color: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+  
+  <!-- JavaScript for handling the logic -->
+  <script>
+    // Get references to the DOM elements
+    const speedDisplay = document.getElementById("speed-display");
+    const currentSpeed = document.getElementById("current-speed");
+    const silenceButton = document.getElementById("silence-button");
+  
+    // Set up an interval to check the vehicle's speed every 1 second
+    setInterval(() => {
+      // Get the current speed of the vehicle
+      const currentSpeed = getVehicleSpeed();
+  
+      // Update the speed display
+      currentSpeed.textContent = currentSpeed;
+  
+      // Enable or disable the silence button based on the current speed
+      if (currentSpeed > 20) {
+        silenceButton.removeAttribute("disabled");
+      } else {
+        silenceButton.setAttribute("disabled", true);
+      }
+    }, 1000);
+  
+    // Set up an event listener for the silence button
+    silenceButton.addEventListener("click", () => {
+      // Silence the ringtone of incoming calls
+      silenceRingtone();
+    });
+  </script>
+  
